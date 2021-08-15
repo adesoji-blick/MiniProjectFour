@@ -1,25 +1,56 @@
-# VPC Network Creation Module #
+# VPC, Subnets, IGW, Routing Table & Subnet Association Creation #
 
-module "vpc" {
-  source = "terraform-aws-modules/vpc/aws"
-
-  name = "App-project VPC"
-  cidr = "10.0.0.0/16"
-
-  azs             = ["ca-central-1a", "ca-central-1b"]
- # private_subnets = ["10.0.2.0/24", "10.0.3.0/24"]
-  public_subnets  = ["10.0.0.0/24", "10.0.1.0/24", "10.0.2.0/24"]
-
-  # enable_nat_gateway = false
-  # enable_vpn_gateway = false
+# VPC Creation #
+resource "aws_vpc" "vpc_module" {
+  cidr_block = var.vpc_cidr_block
 
   tags = {
-    Terraform   = "true"
-    Environment = "dev"
+    Name = var.vpc_name
   }
 }
 
-# provider "aws" {
-#   profile = var.profile
-#   region  = var.region
-# }
+# Subnet Creation #
+resource "aws_subnet" "vpc_module_subnet" {
+  count                   = var.network_instance_count
+  vpc_id                  = aws_vpc.vpc_module.id
+  cidr_block              = var.subnet_cidr_block[count.index]
+  availability_zone       = var.availability_zone[count.index]
+  map_public_ip_on_launch = var.map_public_ip
+
+  tags = {
+    Name = "vpc_module_subnet_${count.index + 1}"
+  }
+}
+
+# Internet Gateway Creation # 
+resource "aws_internet_gateway" "vpc_module_igw" {
+  vpc_id = aws_vpc.vpc_module.id
+
+  tags = {
+    Name = "vpc_module_igw"
+  }
+}
+
+# Route Table Creation # 
+resource "aws_route_table" "vpc_module_rt" {
+  vpc_id = aws_vpc.vpc_module.id
+  route {
+    cidr_block = var.rt_cidr_block
+    gateway_id = aws_internet_gateway.vpc_module_igw.id
+  }
+
+  tags = {
+    Name = "vpc_module_rt"
+  }
+}
+
+# Route Table Association # 
+resource "aws_route_table_association" "vpc_module_rt" {
+  count          = var.network_instance_count
+  subnet_id      = aws_subnet.vpc_module_subnet[count.index].id
+  route_table_id = aws_route_table.vpc_module_rt.id
+
+  # tags = {
+  #   Name = "vpc_module_rt_assoc"
+  # }
+}

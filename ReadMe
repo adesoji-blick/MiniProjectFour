@@ -2,3 +2,12 @@ Mini Project Four
 **********************
 Direction App Project
 **********************
+pwd
+~/ ../MiniProjectFour
+cd PackerAMI/
+Packer init .
+Packer build .
+cd ../
+terraform init
+terraform plan
+terraform apply --auto-approve
