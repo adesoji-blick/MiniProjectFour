@@ -15,7 +15,7 @@ resource "aws_instance" "mini_project4" {
   key_name               = var.ssh_key
   user_data              = data.template_file.ansible_installation.template
   vpc_security_group_ids = ["aws_security_group.sg_module.id"]
-  #subnet_id              = aws_subnet.vpc_module_subnet.id
+  subnet_id              = "aws_subnet.vpc_module_subnet[count.index].id"
 
   tags = {
     Name        = var.tag_name2
