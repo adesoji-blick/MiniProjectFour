@@ -1,0 +1,11 @@
+variable "ami_id" {}
+variable "instance_type" {}
+variable "instance_count" {}
+variable "key" {}
+variable "name" {}
+variable "environment" {}
+variable "role" {}
+variable "httpport" {}
+variable "httpport2" {}
+variable "protocol" {}
+variable "sg-name" {}
