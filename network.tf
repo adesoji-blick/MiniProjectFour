@@ -11,17 +11,15 @@ resource "aws_vpc" "app_vpc" {
 
 # Subnet Creation #
 resource "aws_subnet" "app_vpc_subnet" {
-  # count                   = var.network_instance_count
-  vpc_id            = aws_vpc.app_vpc.id
-  cidr_block        = var.subnet_cidr_block
-  availability_zone = var.availability_zone
-  # cidr_block              = var.subnet_cidr_block[count.index]
-  # availability_zone       = var.availability_zone[count.index]
+  count                   = var.network_instance_count
+  vpc_id                  = aws_vpc.app_vpc.id
+  cidr_block              = var.subnet_cidr_block[count.index]
+  availability_zone       = var.availability_zone[count.index]
   map_public_ip_on_launch = var.map_public_ip
 
   tags = {
-    Name = "app_vpc_subnet"
-    # Name = "app_vpc_subnet_${count.index + 1}"
+    # Name = "app_vpc_subnet"
+    Name = "app_vpc_subnet_${count.index + 1}"
   }
 }
 
@@ -49,12 +47,7 @@ resource "aws_route_table" "app_vpc_rt" {
 
 # Route Table Association # 
 resource "aws_route_table_association" "app_vpc_rt" {
-  count     = var.network_instance_count
-  subnet_id = aws_subnet.app_vpc_subnet.id
-  # subnet_id      = aws_subnet.app_vpc_subnet[count.index].id
+  count          = var.network_instance_count
+  subnet_id      = aws_subnet.app_vpc_subnet[count.index].id
   route_table_id = aws_route_table.app_vpc_rt.id
-
-  # tags = {
-  #   Name = "vpc_module_rt_assoc"
-  # }
 }

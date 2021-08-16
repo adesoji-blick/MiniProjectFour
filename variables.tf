@@ -11,21 +11,25 @@ variable "ami_filter" {
   # default = ["packer-amazon-linux-ami1", "packer-amazon-linux-ami2", "packer-ubuntu-ami"]
 }
 
-variable "instance_type" {
-  default = "t2.micro"
-}
-
-variable "instance_count" {
-  default = "1"
-}
-
 variable "ssh_key" {
   default = "devOps-Project"
 }
 
+variable "instance_type" {
+  default = "t2.micro"
+}
+
+variable "module_instance_count" {
+  default = "3"
+}
+
+variable "resource_count" {
+  default = "1"
+}
+
+
 variable "tag_name" {
-  # default = ["Jenkins server", "Dev-App server", "Prod-App server"]
-  default = "Jenkins server"
+  default = ["Jenkins server", "Dev-App server", "Prod-App server"]
 }
 
 variable "tag_name2" {
@@ -33,8 +37,7 @@ variable "tag_name2" {
 }
 
 variable "environment" {
-  # default = ["Project Env", "Development Env", "Production Env"]
-  default = "Project Env"
+  default = ["Project Env", "Development Env", "Production Env"]
 }
 
 variable "environment2" {
@@ -98,13 +101,11 @@ variable "vpc_cidr_block" {
 }
 
 variable "subnet_cidr_block" {
-  # default = ["10.0.0.0/24", "10.0.1.0/24", "10.0.2.0/24"]
-  default = "10.0.0.0/24"
+  default = ["10.0.0.0/24", "10.0.1.0/24", "10.0.2.0/24"]
 }
 
 variable "availability_zone" {
-  # default = ["ca-central-1a", "ca-central-1b", "ca-central-1a"]
-  default = "ca-central-1a"
+  default = ["ca-central-1a", "ca-central-1b", "ca-central-1a"]
 }
 
 variable "map_public_ip" {
@@ -114,3 +115,4 @@ variable "map_public_ip" {
 variable "rt_cidr_block" {
   default = "0.0.0.0/24"
 }
+
