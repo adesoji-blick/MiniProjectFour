@@ -1,6 +1,7 @@
-resource "aws_security_group" "sg_module" {
-  name   = "${var.sg_name}-Sg"
-  vpc_id = var.vpc_id
+resource "aws_security_group" "app_sg" {
+  name = "${var.sg_name}-Sg"
+  # vpc_id = var.vpc_id
+  vpc_id = aws_vpc.app_vpc.id
 
   ingress {
     from_port   = var.httpport
