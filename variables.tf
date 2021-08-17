@@ -19,37 +19,36 @@ variable "instance_type" {
   default = "t2.micro"
 }
 
-variable "module_instance_count" {
-  default = "3"
-}
-
 variable "resource_count" {
   default = "1"
 }
 
-
-variable "tag_name" {
-  default = ["Jenkins server", "Dev-App server", "Prod-App server"]
-}
-
-variable "tag_name2" {
+variable "resource_tag_name" {
   default = "Tool (Ansible) Server"
 }
 
-variable "environment" {
-  default = ["Project Env", "Development Env", "Production Env"]
-}
-
-variable "environment2" {
+variable "resource_environment" {
   default = "Project Env"
 }
 
-variable "role" {
-  default = "Ansible-user"
+variable "resource_role" {
+  default = "Devops-user"
 }
 
-variable "role2" {
-  default = "Devops-user"
+variable "module_instance_count" {
+  default = "3"
+}
+
+variable "module_tag_name" {
+  default = ["Jenkins server", "Dev-App server", "Prod-App server"]
+}
+
+variable "module_environment" {
+  default = ["Project Env", "Development Env", "Production Env"]
+}
+
+variable "module_role" {
+  default = "Ansible-user"
 }
 
 variable "sg_name" {
