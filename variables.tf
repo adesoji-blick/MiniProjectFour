@@ -112,6 +112,6 @@ variable "map_public_ip" {
 }
 
 variable "rt_cidr_block" {
-  default = "0.0.0.0/24"
+  default = "0.0.0.0/0"
 }
 

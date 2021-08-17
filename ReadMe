@@ -16,3 +16,6 @@ To Build ec2 Instances
 terraform init
 terraform plan
 terraform apply --auto-approve
+
+Execute Ansible Tasks
+cd AnsibleTASK/
