@@ -19,3 +19,6 @@ terraform apply --auto-approve
 
 Execute Ansible Tasks
 cd AnsibleTASK/
+sudo yum update [all machines]
+
+ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i inventory/myhosts playbooks/playbook.yml -C
