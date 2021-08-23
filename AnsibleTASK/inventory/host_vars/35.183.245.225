@@ -4,3 +4,4 @@ node_env: Project
 packages_to_install:
   - Docker
   - git
+  - maven
