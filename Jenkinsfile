@@ -16,13 +16,13 @@ pipeline {
                 sh "ls -ltr"
             }
         }
-        // stage('Run Terraform Init') {
-        //     steps {
-        //         // Initialize terraform backend
-        //         sh "printenv"
-        //         sh "terraform init"
-        //     }
-        // }
+        stage('Build Docker Image') {
+            steps {
+                // Building Docker Image for Direction App
+                sh "sudo docker build -t direction-prod:latest ."
+                sh "sudo docker tag direction-prod:latest blickng/direction-prod:latest"
+          }
+        }
         // stage('Run Terraform Plan') {
         //     steps {
         //         // Run terraform plan
