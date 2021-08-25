@@ -36,18 +36,23 @@
         name: wget
         state: latest
 
-    # - name: add jenkins user
-    #   ansible.builtin.user:
-    #     name: jenkins
-    #     comment: Jenkins
-    #     group: sudo
+    - name: Ensure group "sudo" exists
+      ansible.builtin.group:
+        name: sudo
+        state: present
 
-    # - name: Create a 2048-bit SSH key for user jenkins in ~jenkins/.ssh/id_rsa.pub
-    #   ansible.builtin.user:
-    #     name: jenkins
-    #     generate_ssh_key: yes
-    #     ssh_key_bits: 2048
-    #     ssh_key_file: .ssh/id_rsa
+    - name: add jenkins user
+      ansible.builtin.user:
+        name: jenkins
+        comment: jenkins
+        group: sudo
+
+    - name: Create a 2048-bit SSH key for user jenkins in ~jenkins/.ssh/id_rsa.pub
+      ansible.builtin.user:
+        name: jenkins
+        generate_ssh_key: yes
+        ssh_key_bits: 2048
+        ssh_key_file: .ssh/id_rsa
 
     - name: download jenkins.repo
       get_url:   
