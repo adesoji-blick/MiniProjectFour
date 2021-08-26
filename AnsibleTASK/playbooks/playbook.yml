@@ -33,7 +33,9 @@
   tasks:
     - name: install wget
       yum:
-        name: wget
+        name: 
+         - wget
+         - epel-release
         state: latest
 
     - name: Ensure group "sudo" exists
