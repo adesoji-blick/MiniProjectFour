@@ -22,7 +22,7 @@
 
     - name: create a welcome message
       template:
-        src: ~/AnsibleTASK/templates/welcome_msg.j2
+        src: ~/MiniProjectFour/AnsibleTASK/templates/welcome_msg.j2
         dest: /etc/profile.d/welcome_msg.sh
         owner: root
         group: root
@@ -35,8 +35,11 @@
       yum:
         name: 
          - wget
-         - epel-release
         state: latest
+
+    - name: install epel release
+      ansible.builtin.command:
+        cmd: amazon-linux-extras install epel -y
 
     - name: Ensure group "sudo" exists
       ansible.builtin.group:
