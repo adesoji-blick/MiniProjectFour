@@ -31,7 +31,7 @@
 - hosts: jenkins
   become: True
   tasks:
-    - name: install wget
+    - name: install dependencies
       yum:
         name: 
          - wget
